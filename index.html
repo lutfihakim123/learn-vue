@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice</title>
+</head>
+<style>
+    .active {
+        color: blue;
+    }
+</style>
+<body>
+    <div id="app" >
+        <input type="text" name="nama" id="nama" v-model="nama">
+        <input type="text"  style="margin-left: 10px;" name="umur" id="umur" v-model="umur">
+        <p> {{ nama }}  {{ status }}  </p>
+        <ol v-if="status" :class="{active: isActive}">
+            <li v-for="row in subject" :key="subject.nama">
+                Nama : {{ row.nama }} <br> 
+                Umur : {{ row.Umur }}
+            </li>
+        </ol>
+        <button style="margin-left: 20px;" @click="changeColor()">Active</button>
+        
+    </div>
+
+    <script src="https://unpkg.com/vue@3"></script>
+    <script>
+        const container = {
+            data() {
+                return {
+                    subject: [
+                        { nama : 'Lutfi', Umur : '20'},
+                        { nama : 'Asep', Umur : '20'},
+                        { nama : 'Hadi', Umur : '20'},
+                        { nama : 'Anda', Umur : '20'},
+                    ],
+                    isActive : false,
+                    nama : 'Lutfi Rahman Hakim',
+                    umur : '70',
+                }
+            },
+            methods: {
+                changeColor() {
+                    this.isActive = true
+                }
+            },
+            computed: {
+                status() {
+                    if (this.umur >= 50) {
+                        return 'Anda Tua Sekali'
+                    } else {
+                        return 'Anda Muda Sekali'
+                    }
+                }
+            }
+        }
+        Vue.createApp(container).mount('#app')
+    </script>
+</body>
+</html>
